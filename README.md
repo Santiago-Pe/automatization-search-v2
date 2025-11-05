@@ -2,8 +2,6 @@
 company-enricher-mvp/
 ├── package.json          # Dependencias
 ├── tsconfig.json         # Config TypeScript
-├── credentials.json      # Google Sheets auth
-├── .env                 # Variables entorno
 ├── src/
 │   ├── index.ts         # Punto entrada principal
 │   ├── types.ts         # Interfaces TypeScript
