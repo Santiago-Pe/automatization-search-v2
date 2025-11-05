@@ -1,4 +1,4 @@
-import type { ContactInfo } from '../types';
+import type { ContactInfo } from '../utils/types';
 import { SearchService } from './search';
 
 export class ScraperService {

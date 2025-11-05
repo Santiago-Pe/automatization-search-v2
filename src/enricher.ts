@@ -1,4 +1,4 @@
-import type { Company, EnrichmentResult } from './types';
+import type { Company, EnrichmentResult } from './utils/types';
 import { SearchService } from './services/search';
 import { ScraperService } from './services/scraper';
 

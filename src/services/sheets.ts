@@ -1,6 +1,6 @@
 import { google } from 'googleapis';
 import { CONFIG } from '../config';
-import type { Company, EnrichmentResult } from '../types';
+import type { Company, EnrichmentResult } from '../utils/types';
 
 const URL_SCOPE ="https://www.googleapis.com/auth/spreadsheets"
 
