@@ -17,8 +17,8 @@ export function askQuestion(question: string): Promise<string> {
 export async function getUserSelection(totalCompanies: number): Promise<number> {
   console.log(`\nOpciones disponibles:`);
   console.log(`  1. Procesar TODAS las ${totalCompanies} empresas`);
-  console.log(`  2. Procesar las primeras 10 empresas`);
-  console.log(`  3. Procesar las primeras 50 empresas`);
+  console.log(`  2. Procesar las primeras 3 empresas (recomendado para testing)`);
+  console.log(`  3. Procesar las primeras 5 empresas`);
   console.log(`  4. Especificar cantidad personalizada`);
   console.log(`  5. Cancelar`);
   
@@ -29,9 +29,9 @@ export async function getUserSelection(totalCompanies: number): Promise<number> 
       case '1':
         return totalCompanies;
       case '2':
-        return Math.min(10, totalCompanies);
+        return Math.min(3, totalCompanies);
       case '3':
-        return Math.min(50, totalCompanies);
+        return Math.min(5, totalCompanies);
       case '4':
         while (true) {
           const customAmount = await askQuestion(`¿Cuántas empresas quieres procesar? (máx ${totalCompanies}): `);
