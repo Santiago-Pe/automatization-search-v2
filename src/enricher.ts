@@ -10,6 +10,7 @@ export class CompanyEnricher {
 
   constructor() {
     this.searchService = new SearchService();
+    this.scraperService = new ScraperService(null); // Se actualizará en initialize()
     
     this.stats = {
       total: 0,
@@ -21,7 +22,7 @@ export class CompanyEnricher {
     };
   }
 
-    private async processBatchConcurrently(batch: Company[]): Promise<EnrichmentResult[]> {
+  private async processBatchConcurrently(batch: Company[]): Promise<EnrichmentResult[]> {
     const semaphore = new Array(CONFIG.processing.maxConcurrent).fill(null);
     const results: EnrichmentResult[] = [];
     
@@ -60,6 +61,7 @@ export class CompanyEnricher {
   }
 
   private async findWebsite(company: Company): Promise<string | null> {
+    // To do: usar attempt
     try {
       console.log(`  🔍 Buscando sitio web...`);
       const website = await this.searchService.findCompanyWebsite(company);
@@ -83,6 +85,7 @@ export class CompanyEnricher {
   }
 
   private async extractContactInfo(website: string): Promise<any> {
+    // to do: usar attempt
     try {
       console.log(`  📞 Extrayendo información de contacto...`);
       return await this.scraperService.extractContacts(website);
@@ -185,10 +188,12 @@ export class CompanyEnricher {
     console.log(`  • Fallidas: ${this.stats.failed} (${((this.stats.failed / this.stats.total) * 100).toFixed(1)}%)`);
   }
 
+  // Publics methods
   async initialize(): Promise<void> {
     console.log('🚀 Inicializando servicios de enriquecimiento...');
     
     await this.searchService.initialize();
+    // Reasignar con el browser correcto
     this.scraperService = new ScraperService((this.searchService as any).browser);
     
     console.log('✅ Servicios inicializados correctamente');
